@@ -16,13 +16,10 @@ public class App
         System.out.println( "client" );
         Socket s;
         BufferedReader tastiera;
-        int send;
-        String receive;
+        String send;
         DataOutputStream out;
         BufferedReader in;
-        int status = 4;
-
-
+        String status;
 
         try{
 
@@ -31,41 +28,34 @@ public class App
             out = new DataOutputStream(s.getOutputStream());
 
             System.out.println("server pronto");
-
             tastiera = new BufferedReader(new InputStreamReader(System.in));
 
-
-
-            while(status != 0){
+            do{
+          
                 System.out.println("inserisci numero");
+                send = tastiera.readLine();
+                out.writeBytes(send+"\n");
+                status = in.readLine();
 
-                send = tastiera.read();
-
-                out.writeInt(send);
-
-                status = in.read();
-
-                System.out.println("risposta" + status);
-
+                System.out.println("risposta " + status);
 
                 switch(status){
-
-                    case 0:
+                    case "0":
                         System.out.println("numero giusto");
                         break;
-                    case 1:
+                    case "1":
                         System.out.println("numero è più piccolo");
                         break;
-                    case 2:
+                    case "2":
                         System.out.println("numero è più grande");
+                        break;
+                    default:
+                        System.out.println("numero non valido");
                         break;
                 }
 
-            }
-           
-
+            }while(!status.equals("2"));
             s.close();
-
 
         }
         catch(Exception e){
