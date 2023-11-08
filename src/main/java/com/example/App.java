@@ -40,21 +40,24 @@ public class App
                 System.out.println("risposta " + status);
 
                 switch(status){
-                    case "0":
-                        System.out.println("numero giusto");
-                        break;
+                    
+                        
                     case "1":
-                        System.out.println("numero è più piccolo");
+                        System.out.println("numero è più grande");
                         break;
                     case "2":
-                        System.out.println("numero è più grande");
+                        System.out.println("numero è più piccolo");
+                        break;
+                    case "3":
+                        int tentativi = Integer.parseInt(in.readLine());
+                        System.out.println("numero è giusto " + tentativi);
                         break;
                     default:
                         System.out.println("numero non valido");
                         break;
                 }
 
-            }while(!status.equals("2"));
+            }while(!status.equals("3"));
             s.close();
 
         }
